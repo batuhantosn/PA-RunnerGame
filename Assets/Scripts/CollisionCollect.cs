@@ -11,6 +11,15 @@ public class CollisionCollect : MonoBehaviour
 
     public PlayerController playerController;
     public int maxScore;
+
+    public Animator PlayerAnim;
+    public GameObject Player;
+    public GameObject EndPanel;
+
+    private void Start()
+    {
+        PlayerAnim = Player.GetComponentInChildren<Animator>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Coin"))
@@ -20,16 +29,26 @@ public class CollisionCollect : MonoBehaviour
         }
         else if(other.CompareTag("End"))
         {
+            playerController.runningSpeed = 0;
+            transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
+            EndPanel.SetActive(true);
             if (score >= maxScore)
             {
-                Debug.Log("You Win!..");
+                //Debug.Log("You Win!..");
+                PlayerAnim.SetBool("win",true);
             }
             else
             {
-                Debug.Log("You Lose!..");
+                //Debug.Log("You Lose!..");
+                PlayerAnim.SetBool("lose", true);
             }
-            playerController.runningSpeed = 0;
+            
         }
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     private void OnCollisionEnter(Collision collision)
     {
