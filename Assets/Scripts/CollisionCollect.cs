@@ -10,6 +10,7 @@ public class CollisionCollect : MonoBehaviour
     public TextMeshProUGUI CoinText;
 
     public PlayerController playerController;
+    public int maxScore;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Coin"))
@@ -19,7 +20,14 @@ public class CollisionCollect : MonoBehaviour
         }
         else if(other.CompareTag("End"))
         {
-            Debug.Log("Win");
+            if (score >= maxScore)
+            {
+                Debug.Log("You Win!..");
+            }
+            else
+            {
+                Debug.Log("You Lose!..");
+            }
             playerController.runningSpeed = 0;
         }
     }
