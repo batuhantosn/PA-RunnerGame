@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
+using DG.Tweening;
 
 public class CollisionCollect : MonoBehaviour
 {
@@ -16,10 +18,23 @@ public class CollisionCollect : MonoBehaviour
     public GameObject Player;
     public GameObject EndPanel;
 
+    public Transform targetLoc;
+    public GameObject coinPrefab;
+
+    public Queue<GameObject> coinQueue = new Queue<GameObject>();
+    private Vector3 targetPosition;
+    public GameObject canvasObject;
+
+    private void Awake()
+    {
+        CreateCoin();
+    }
+
     private void Start()
     {
         PlayerAnim = Player.GetComponentInChildren<Animator>();
     }
+  
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Coin"))
@@ -27,7 +42,7 @@ public class CollisionCollect : MonoBehaviour
             Destroy(other.gameObject);
             AddCoin();
         }
-        else if(other.CompareTag("End"))
+        else if (other.CompareTag("End"))
         {
             playerController.runningSpeed = 0;
             transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
@@ -35,16 +50,17 @@ public class CollisionCollect : MonoBehaviour
             if (score >= maxScore)
             {
                 //Debug.Log("You Win!..");
-                PlayerAnim.SetBool("win",true);
+                PlayerAnim.SetBool("win", true);
             }
             else
             {
                 //Debug.Log("You Lose!..");
                 PlayerAnim.SetBool("lose", true);
             }
-            
+
         }
     }
+
 
     public void RestartGame()
     {
@@ -54,14 +70,45 @@ public class CollisionCollect : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            Debug.Log("Collision with obstacle");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            RestartGame();
         }
     }
-
+    public void CreateCoin()
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            GameObject coin = Instantiate(coinPrefab);
+            coin.transform.SetParent(canvasObject.transform, false);
+            coin.transform.position = transform.position;
+            coin.SetActive(false);
+            coinQueue.Enqueue(coin);
+           
+        }
+    }
     public void AddCoin()
     {
+        
+        
+
+        for (int i = 0; i < 1; i++)
+        {
+            GameObject coin = coinQueue.Dequeue();
+            coin.transform.position = Player.transform.position;
+            coin.SetActive(true);
+
+            coin.transform.DOMove(targetLoc.position, Random.Range(1f, 3f)).SetEase(Ease.OutSine).OnComplete(() =>
+            {
+                coin.SetActive(false);
+                coinQueue.Enqueue(coin);
+            });
+
+        }
         score++;
-        CoinText.text = "Score : " + score.ToString();
+        CoinText.text = "x " + score.ToString();
+
+
     }
+
+    
+
 }
