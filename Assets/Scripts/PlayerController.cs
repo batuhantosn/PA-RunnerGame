@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float runningSpeed;
+    public float runningSpeed = 0;
     float touchXDelta = 0;
     float newX = 0;
     public float xSpeed;

@@ -17,6 +17,7 @@ public class CollisionCollect : MonoBehaviour
     public Animator PlayerAnim;
     public GameObject Player;
     public GameObject EndPanel;
+    public GameObject StartPanel;
 
     public Transform targetLoc;
     public GameObject coinPrefab;
@@ -24,6 +25,9 @@ public class CollisionCollect : MonoBehaviour
     public Queue<GameObject> coinQueue = new Queue<GameObject>();
     private Vector3 targetPosition;
     public GameObject canvasObject;
+
+    public AudioSource _audioSource;
+    public AudioClip _clip;
 
     private void Awake()
     {
@@ -39,6 +43,7 @@ public class CollisionCollect : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
+            _audioSource.PlayOneShot(_clip);
             Destroy(other.gameObject);
             AddCoin();
         }
@@ -65,6 +70,12 @@ public class CollisionCollect : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void StartGame(){
+        StartPanel.SetActive(false);
+        PlayerAnim.SetBool("start",true);
+        transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
+        playerController.runningSpeed = 10;
     }
     private void OnCollisionEnter(Collision collision)
     {
