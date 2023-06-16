@@ -3426,7 +3426,6 @@ GameObject:
   - component: {fileID: 1306266740}
   - component: {fileID: 1306266739}
   - component: {fileID: 1306266741}
-  - component: {fileID: 1306266742}
   - component: {fileID: 1306266743}
   m_Layer: 0
   m_Name: Player
@@ -3520,15 +3519,7 @@ MonoBehaviour:
   coinPrefab: {fileID: 2108661765126134983, guid: 5a7bb3bb1e95c8240818a3c13f7f940e, type: 3}
   canvasObject: {fileID: 1231458454}
   _audioSource: {fileID: 1306266743}
-  _clip: {fileID: 0}
---- !u!81 &1306266742
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1306266736}
-  m_Enabled: 1
+  _clip: {fileID: 8300000, guid: f387ea9729532144aa9fe77d9c803aa6, type: 3}
 --- !u!82 &1306266743
 AudioSource:
   m_ObjectHideFlags: 0
