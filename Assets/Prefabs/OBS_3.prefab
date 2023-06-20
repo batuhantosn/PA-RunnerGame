@@ -204,6 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3575732549734076621}
   - component: {fileID: 3575732549734076623}
+  - component: {fileID: 1506835433969922723}
   m_Layer: 0
   m_Name: ArmParent
   m_TagString: Untagged
@@ -244,6 +245,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blade: {fileID: 3575732550257317230}
   rotateArmSpeed: 2
+--- !u!208 &1506835433969922723
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3575732549734076620}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.5, y: 0.81, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: -2.22, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3575732550025252764
 GameObject:
   m_ObjectHideFlags: 0
