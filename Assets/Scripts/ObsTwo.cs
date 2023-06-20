@@ -15,16 +15,14 @@ public class ObsTwo : MonoBehaviour
     {
         Sequence myLeftSequence = DOTween.Sequence();
         myLeftSequence.Append(leftObs.DOLocalMove(new Vector3(-0.3f,1,0),transformSpeed));
-        myLeftSequence.Append(leftObs.DOLocalMove(new Vector3(-3.5f,1,0),transformSpeed));
         myLeftSequence.SetEase(Ease.Linear);
-        myLeftSequence.SetLoops(-1,LoopType.Restart);
+        myLeftSequence.SetLoops(-1,LoopType.Yoyo);
         
 
         Sequence myRightSequence = DOTween.Sequence();
         myRightSequence.Append(rightObs.DOLocalMove(new Vector3(0.3f,1,0),transformSpeed));
-        myRightSequence.Append(rightObs.DOLocalMove(new Vector3(3.5f,1,0),transformSpeed));
         myRightSequence.SetEase(Ease.Linear);
-        myRightSequence.SetLoops(-1,LoopType.Restart);
+        myRightSequence.SetLoops(-1,LoopType.Yoyo);
 
         
     

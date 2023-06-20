@@ -13,9 +13,10 @@ public class ObsOne : MonoBehaviour
     {
         Sequence mySequence = DOTween.Sequence();
         float mult = Random.Range(0.5f,1.5f);
-        mySequence.Append(transform.DOLocalMove(new Vector3(3.5f, 0.2f, 0), transformSpeed*mult).SetEase(Ease.InOutQuad));
-        mySequence.Append(transform.DOLocalMove(new Vector3(-3.5f, 0.2f, 0), transformSpeed*mult).SetEase(Ease.InOutQuad));
-        mySequence.SetLoops(-1 , LoopType.Restart);
+        mySequence.Append(transform.DOLocalMove(new Vector3(3.5f, 0.2f, 0), transformSpeed*mult).SetEase(Ease.Linear));
+        mySequence.SetLoops(-1 , LoopType.Yoyo);
+
+        
 
         for (int i = 0; i < _innerShape.Length; i++)
         {
