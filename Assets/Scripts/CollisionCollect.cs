@@ -13,9 +13,11 @@ public class CollisionCollect : MonoBehaviour
     public GameObject Player;
     public GameObject EndPanel;
     public GameObject StartPanel;
+    public Vector3 PLayerStartPos;
 
     private void Start()
     {
+        PLayerStartPos = new Vector3(transform.position.x,transform.position.y,transform.position.z);
         PlayerAnim = Player.GetComponentInChildren<Animator>();
     }
   
@@ -28,9 +30,10 @@ public class CollisionCollect : MonoBehaviour
             EndPanel.SetActive(true);
             PlayerAnim.SetBool("win", true);             
         }
-        else
+        if (other.CompareTag("Speedboost"))
         {
-            PlayerAnim.SetBool("lose", true);
+            playerController.runningSpeed += 3f ;
+            StartCoroutine(SlowWileCoroutine()); 
         }
     }
 
@@ -39,7 +42,7 @@ public class CollisionCollect : MonoBehaviour
         StartPanel.SetActive(false);
         PlayerAnim.SetBool("start",true);
         transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
-        playerController.runningSpeed = 10;
+        playerController.runningSpeed = 8f;
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -51,6 +54,12 @@ public class CollisionCollect : MonoBehaviour
         public void RestartGame()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        transform.position = PLayerStartPos;
+    }
+    private IEnumerator SlowWileCoroutine()
+    {
+        yield return new WaitForSeconds(2.0f);
+        playerController.runningSpeed-=3f;
     }
     
 
