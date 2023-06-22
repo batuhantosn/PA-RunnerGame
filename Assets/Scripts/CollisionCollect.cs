@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
-
+using EasyTransition;
 public class CollisionCollect : Runner
 {
 
@@ -14,8 +14,15 @@ public class CollisionCollect : Runner
     public GameObject EndPanel;
     public GameObject StartPanel;
 
+     public TransitionSettings restartTransition;
+    public TransitionSettings startTransition;
+
+
+    
+
     private void Start()
     {
+        
         SpeedBoosterIcon.SetActive(false);
         PlayerAnim = Player.GetComponentInChildren<Animator>();
     }
@@ -52,14 +59,17 @@ public class CollisionCollect : Runner
 
     public void StartGame()
     {
+        TransitionManager.Instance().Transition(startTransition, 0f);    
+        playerController.runningSpeed = 8f;
+        //Add start düdük sound;
         StartPanel.SetActive(false);
         PlayerAnim.SetBool("start", true);
         transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
-        playerController.runningSpeed = 8f;
     }
     public void RestartGame()
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //Restart Transition can be add
+        TransitionManager.Instance().Transition(SceneManager.GetActiveScene().buildIndex,restartTransition, 0f);
     }
     private IEnumerator SlowWileCoroutine()
     {
