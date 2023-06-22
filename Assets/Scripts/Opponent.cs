@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Opponent : MonoBehaviour
+public class Opponent : Runner
 {
-
     public NavMeshAgent OpponentAgent;
     public GameObject Target;
-    public Vector3 OpponentStartPos;
-    public GameObject SpeedBoosterIcon;
     // Start is called before the first frame update
     void Start()
     {
         SpeedBoosterIcon.SetActive(false);
         OpponentAgent = GetComponent<NavMeshAgent>();
-        OpponentStartPos = new Vector3(transform.position.x,transform.position.y,transform.position.z);
         
     }
 
@@ -26,14 +22,6 @@ public class Opponent : MonoBehaviour
         if (GameManager.instance.isGameOVer)
         {
             OpponentAgent.Stop();
-        }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            transform.position = OpponentStartPos;
         }
     }
 

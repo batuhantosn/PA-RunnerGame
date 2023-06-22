@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 
-public class CollisionCollect : MonoBehaviour
+public class CollisionCollect : Runner
 {
 
     public PlayerController playerController;
@@ -13,14 +13,10 @@ public class CollisionCollect : MonoBehaviour
     public GameObject Player;
     public GameObject EndPanel;
     public GameObject StartPanel;
-    public Vector3 PLayerStartPos;
-    public GameObject SpeedBoosterIcon;
-    private InGameRanking ig;
 
     private void Start()
     {
         SpeedBoosterIcon.SetActive(false);
-        PLayerStartPos = new Vector3(transform.position.x,transform.position.y,transform.position.z);
         PlayerAnim = Player.GetComponentInChildren<Animator>();
     }
   
@@ -28,7 +24,7 @@ public class CollisionCollect : MonoBehaviour
     {
         if (other.CompareTag("End"))
         {
-            if (ig.nameText[4].text == "Player")
+            if (GameManager.instance.ig.nameText[4].text == "Player")
             {
                 Debug.Log("you win");
             }else
@@ -59,17 +55,9 @@ public class CollisionCollect : MonoBehaviour
         transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
         playerController.runningSpeed = 8f;
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            RestartGame();
-        }
-    }
         public void RestartGame()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        transform.position = PLayerStartPos;
     }
     private IEnumerator SlowWileCoroutine()
     {
