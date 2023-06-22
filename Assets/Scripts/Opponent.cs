@@ -23,6 +23,10 @@ public class Opponent : MonoBehaviour
     void Update()
     {
         OpponentAgent.SetDestination(Target.transform.position);
+        if (GameManager.instance.isGameOVer)
+        {
+            OpponentAgent.Stop();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

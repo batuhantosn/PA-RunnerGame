@@ -14,9 +14,12 @@ public class CollisionCollect : MonoBehaviour
     public GameObject EndPanel;
     public GameObject StartPanel;
     public Vector3 PLayerStartPos;
+    public GameObject SpeedBoosterIcon;
+    private InGameRanking ig;
 
     private void Start()
     {
+        SpeedBoosterIcon.SetActive(false);
         PLayerStartPos = new Vector3(transform.position.x,transform.position.y,transform.position.z);
         PlayerAnim = Player.GetComponentInChildren<Animator>();
     }
@@ -25,16 +28,28 @@ public class CollisionCollect : MonoBehaviour
     {
         if (other.CompareTag("End"))
         {
-            playerController.runningSpeed = 0;
-            transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
-            EndPanel.SetActive(true);
-            PlayerAnim.SetBool("win", true);             
+            if (ig.nameText[4].text == "Player")
+            {
+                Debug.Log("you win");
+            }else
+            {
+                Debug.Log("you lose");
+            }
+                   PlayerFinished();
         }
         if (other.CompareTag("Speedboost"))
         {
+            SpeedBoosterIcon.SetActive(true);
             playerController.runningSpeed += 3f ;
             StartCoroutine(SlowWileCoroutine()); 
         }
+    }
+    void PlayerFinished(){
+            playerController.runningSpeed = 0;
+            transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
+            EndPanel.SetActive(true);
+            PlayerAnim.SetBool("win", true);
+            GameManager.instance.isGameOVer = true;      
     }
 
 
@@ -60,6 +75,7 @@ public class CollisionCollect : MonoBehaviour
     {
         yield return new WaitForSeconds(2.0f);
         playerController.runningSpeed-=3f;
+        SpeedBoosterIcon.SetActive(false);
     }
     
 
