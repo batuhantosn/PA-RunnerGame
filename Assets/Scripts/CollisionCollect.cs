@@ -19,52 +19,54 @@ public class CollisionCollect : Runner
         SpeedBoosterIcon.SetActive(false);
         PlayerAnim = Player.GetComponentInChildren<Animator>();
     }
-  
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("End"))
         {
             if (GameManager.instance.ig.nameText[4].text == "Player")
             {
-                Debug.Log("you win");
-            }else
-            {
-                Debug.Log("you lose");
+                PlayerAnim.SetBool("win", true);
             }
-                   PlayerFinished();
+            else
+            {
+                PlayerAnim.SetBool("lose", true);
+            }
+            PlayerFinished();
         }
         if (other.CompareTag("Speedboost"))
         {
             SpeedBoosterIcon.SetActive(true);
-            playerController.runningSpeed += 3f ;
-            StartCoroutine(SlowWileCoroutine()); 
+            playerController.runningSpeed += 3f;
+            StartCoroutine(SlowWileCoroutine());
         }
     }
-    void PlayerFinished(){
-            playerController.runningSpeed = 0;
-            transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
-            EndPanel.SetActive(true);
-            PlayerAnim.SetBool("win", true);
-            GameManager.instance.isGameOVer = true;      
+    void PlayerFinished()
+    {
+        playerController.runningSpeed = 0;
+        transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
+        EndPanel.SetActive(true);
+        GameManager.instance.isGameOVer = true;
     }
 
 
-    public void StartGame(){
+    public void StartGame()
+    {
         StartPanel.SetActive(false);
-        PlayerAnim.SetBool("start",true);
+        PlayerAnim.SetBool("start", true);
         transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);
         playerController.runningSpeed = 8f;
     }
-        public void RestartGame()
+    public void RestartGame()
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     private IEnumerator SlowWileCoroutine()
     {
         yield return new WaitForSeconds(2.0f);
-        playerController.runningSpeed-=3f;
+        playerController.runningSpeed -= 3f;
         SpeedBoosterIcon.SetActive(false);
     }
-    
+
 
 }
