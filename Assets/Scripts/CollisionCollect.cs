@@ -14,7 +14,7 @@ public class CollisionCollect : Runner
     public GameObject EndPanel;
     public GameObject StartPanel;
 
-     public TransitionSettings restartTransition;
+    public TransitionSettings restartTransition;
     public TransitionSettings startTransition;
 
 
