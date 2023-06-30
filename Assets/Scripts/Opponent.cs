@@ -19,7 +19,7 @@ public class Opponent : Runner
         SpeedBoosterIcon.SetActive(false);
         OpponentAgent = GetComponent<NavMeshAgent>();
         OpponentAgent.isStopped = true;
-        PlayerRotation.Rotate(transform.rotation.x, 180, transform.rotation.z,Space.Self);
+        //PlayerRotation.Rotate(transform.rotation.x, 180, transform.rotation.z,Space.Self);
         
         
     }

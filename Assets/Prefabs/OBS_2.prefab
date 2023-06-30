@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a400b55a8b09e4bbf013ccddc44976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transformSpeed: 4
+  transformSpeed: 10
   rotateSpeed: 2
   leftObs: {fileID: 7024778278276687952}
   rightObs: {fileID: 8204403150365461469}

@@ -12,16 +12,12 @@ public abstract class Runner : MonoBehaviour
 
     private void Start() {
         RunnerStartPos = new Vector3(transform.position.x,transform.position.y,transform.position.z);
+        RunnerStartPos = gameObject.transform.position;
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle") && gameObject.name == "Player")
+        if (collision.gameObject.CompareTag("Obstacle"))
         {   
-
-            transform.position = RunnerStartPos;
-        }
-        else if (collision.gameObject.CompareTag("Obstacle"))
-        {
             transform.position = RunnerStartPos;
         }
     }

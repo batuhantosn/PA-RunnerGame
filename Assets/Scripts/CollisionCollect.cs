@@ -61,7 +61,6 @@ public class CollisionCollect : Runner
     {
         TransitionManager.Instance().Transition(startTransition, 0f);    
         playerController.runningSpeed = 8f;
-        //Add start düdük sound;
         StartPanel.SetActive(false);
         PlayerAnim.SetBool("start", true);
         transform.Rotate(transform.rotation.x, 180, transform.rotation.z, Space.Self);

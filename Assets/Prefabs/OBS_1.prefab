@@ -53,7 +53,7 @@ MonoBehaviour:
   - {fileID: 3485783418929002485}
   - {fileID: 387995173961416176}
   - {fileID: 4202833126155931153}
-  transformSpeed: 3
+  transformSpeed: 6
   rotateSpeed: 1
 --- !u!208 &7436935913333565936
 NavMeshObstacle:
